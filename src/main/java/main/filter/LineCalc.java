@@ -25,7 +25,7 @@ public class LineCalc extends Filter {
     @Override
     public float[][][] run(float[][][] img, int resX, int resY, float delta) {
         LineCon con = screen.getController(LineCon.class);
-        return calc(con.getIt(), con.getRate(), new float[]{con.getX(), con.getY()}, con.getW(), con.getPoints(), img, resX, resY);
+        return calc(con.getIt(), con.getRate(), new float[]{con.getX(), con.getY()}, con.getW(), con.getPoints(), img, resX, resY, delta);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class LineCalc extends Filter {
 
     Random random = new Random();
 
-    public float[][][] calc(int iter, float rate, float[] start, float width, int n, float[][][] img, int resX, int rexY){
+    public float[][][] calc(int iter, float rate, float[] start, float width, int n, float[][][] img, int resX, int rexY, float delta){
         ArrayList<float[]> points = new ArrayList<>();
         float[][][] ret = new float[resX][rexY][3];
         for (int i = 0; i < n+1; i++){
@@ -71,7 +71,7 @@ public class LineCalc extends Filter {
                     for (int j = 0; j < rexY; j++) {
                         float top = Math.abs(dirY*(i-point[0])- dirX*(j-point[1]));
                         float dist = (float) Math.sqrt(Math.pow(point[0] - i, 2) + Math.pow(point[1] - j, 2));
-                        if (top < width) {
+                        if (top < width*delta) {
                             int sX = i - source[0];
                             int sY = j - source[1];
                             if (sX >= 0 && sY >= 0 && sX < resX && sY < rexY) {
