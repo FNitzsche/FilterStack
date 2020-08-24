@@ -7,6 +7,7 @@ import main.Controller.VoronoiCon;
 import main.FXMLLoad;
 import main.filter.assiClasses.MyCom;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class simCalc extends Filter {
@@ -41,14 +42,39 @@ public class simCalc extends Filter {
             }
         }
         Arrays.sort(flat, new MyCom());
-        for (int i = 0; i < n; i++){
-            float v = 0;
-            for (int j = 0; j < resX*rexY/n; j++){
-                v += flat[resX*rexY/n*i+j][0];
+        ArrayList<Integer> changePos = new ArrayList<>();
+        for (int i = 1; i < flat.length; i++){
+            if (flat[i][0] != flat[i-1][0] || flat[i][1] != flat[i-1][1] || flat[i][2] != flat[i-1][2]){
+                changePos.add(i);
             }
-            v /= resX*rexY/n;
-            for (int j = 0; j < resX*rexY/n; j++){
-                flat[resX*rexY/n*i+j][0] = v;
+        }
+
+        float[][] positions = new float[n][2];
+        for (int i = 0; i < n; i++){
+            positions[i][0] = -1;
+        }
+
+        for (Integer i: changePos){
+            for (int j = 1; j < n+1; j++){
+                float dist = Math.abs((resX*rexY/n)*j - i);
+                if (positions[j-1][0] == -1 || dist < positions[j-1][1]){
+                    positions[j-1][0] = i;
+                    positions[j-1][1] = dist;
+                }
+            }
+        }
+
+
+        for (int i = 0; i < n; i++){
+            if (positions[i][0] != -1) {
+                float v = 0;
+                for (int j = (i == 0? 0: (int)positions[i-1][0]); j < positions[i][0]; j++) {
+                    v += flat[j][0];
+                }
+                v /= positions[i][0]-(i == 0? 0: (int)positions[i-1][0]);
+                for (int j = (i == 0? 0: (int)positions[i-1][0]); j < positions[i][0]; j++) {
+                    flat[j][0] = v;
+                }
             }
         }
         for (int i = 0; i < resX; i++) {
