@@ -44,7 +44,7 @@ public class simCalc extends Filter {
         Arrays.sort(flat, new MyCom());
         ArrayList<Integer> changePos = new ArrayList<>();
         for (int i = 1; i < flat.length; i++){
-            if (flat[i][0] != flat[i-1][0] || flat[i][1] != flat[i-1][1] || flat[i][2] != flat[i-1][2]){
+            if (flat[i][0] != flat[i-1][0]){
                 changePos.add(i);
             }
         }
