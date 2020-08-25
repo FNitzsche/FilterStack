@@ -102,7 +102,8 @@ public class FXMLLoad {
      * @return if the loading was successful
      */
     private boolean loadFXML(String fxmlpath, String propertiespath, Object controller) {
-
+        System.out.println("Path to try: " + fxmlpath);
+        System.out.println("Path to properties: " + propertiespath);
         boolean success = true;
 
         if ((fxmlpath == null) || (propertiespath == null)) {
@@ -114,11 +115,15 @@ public class FXMLLoad {
         ResourceBundle bundle = null;
         URL loc = null;
         try {
-            inputStream = classLoader.getResource(propertiespath).openStream();
+            System.out.println(classLoader.getResource(propertiespath).toString());
+            inputStream = classLoader.
+                    getResource(propertiespath).
+                    openStream();
             bundle = new PropertyResourceBundle(inputStream);
             resourceBundle = bundle;
             loc = getClass().getResource(fxmlpath);
         } catch (IOException e) {
+            System.out.println("Path tried: " + fxmlpath);
             e.printStackTrace();
             success = false;
         }
