@@ -1,4 +1,4 @@
-package main.filter;
+package main.filter.assiClasses;
 
 import main.FXMLLoad;
 

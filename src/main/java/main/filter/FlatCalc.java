@@ -2,14 +2,13 @@ package main.filter;
 
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
-import main.Controller.ReducedColorCon;
 import main.Controller.SmoothOneCon;
 import main.FXMLLoad;
+import main.filter.assiClasses.Filter;
 
-import java.awt.*;
 import java.util.Arrays;
 
-public class FlatCalc extends Filter{
+public class FlatCalc extends Filter {
 
     int id = -1;
     static int count = 0;

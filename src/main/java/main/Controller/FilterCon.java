@@ -3,7 +3,7 @@ package main.Controller;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import main.FXMLLoad;
-import main.filter.Filter;
+import main.filter.assiClasses.Filter;
 
 public class FilterCon {
     ListView view;

@@ -2,14 +2,13 @@ package main.filter;
 
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
-import main.Controller.SmoothOneCon;
 import main.Controller.SmoothTwoCon;
 import main.FXMLLoad;
+import main.filter.assiClasses.Filter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
-public class LineSmooth extends Filter{
+public class LineSmooth extends Filter {
 
     int id = -1;
     static int count = 0;

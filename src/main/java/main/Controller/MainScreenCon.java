@@ -12,12 +12,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import main.filter.*;
+import main.filter.assiClasses.Filter;
 
 import javax.imageio.ImageIO;
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.TreeMap;
 import java.util.concurrent.*;
 
 
@@ -65,11 +64,11 @@ public class MainScreenCon {
         addType.getItems().add("Lines");
         addType.getItems().add("Specific Colors");
         addType.getItems().add("Replace Color");
+        addType.getItems().add("Saturation&Contrast");
         addType.getSelectionModel().select(0);
 
         add.setOnAction(t -> addFilter());
         filterList.setOnMouseClicked(t -> viewSelected());
-        filterList.setCellFactory(param -> new FilterCell());
         load.setOnAction(t -> loadImage());
         apply.setOnAction(t -> previewFilters());
         up.setOnAction(t -> moveUp());
@@ -94,6 +93,7 @@ public class MainScreenCon {
             case "Lines": filterList.getItems().add(new LineCalc(filterList, container));break;
             case "Specific Colors": filterList.getItems().add(new SpecificColors(filterList, container));break;
             case "Replace Color": filterList.getItems().add(new RepColor(filterList, container));break;
+            case "Saturation&Contrast": filterList.getItems().add(new SatConCalc(filterList, container));break;
         }
     }
 

@@ -3,8 +3,8 @@ package main.filter;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import main.Controller.ReducedColorCon;
-import main.Controller.VoronoiCon;
 import main.FXMLLoad;
+import main.filter.assiClasses.Filter;
 import main.filter.assiClasses.MyCom;
 
 import java.util.ArrayList;

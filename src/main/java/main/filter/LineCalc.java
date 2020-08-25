@@ -3,11 +3,9 @@ package main.filter;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import main.Controller.LineCon;
-import main.Controller.SmoothOneCon;
-import main.Controller.VoronoiCon;
 import main.FXMLLoad;
+import main.filter.assiClasses.Filter;
 
-import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.Random;
 

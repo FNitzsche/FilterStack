@@ -2,9 +2,9 @@ package main.filter;
 
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
-import main.Controller.LineCon;
 import main.Controller.SpecificColorCon;
 import main.FXMLLoad;
+import main.filter.assiClasses.Filter;
 
 import java.util.Arrays;
 

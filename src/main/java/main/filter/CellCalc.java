@@ -4,6 +4,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import main.Controller.VoronoiCon;
 import main.FXMLLoad;
+import main.filter.assiClasses.Filter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
