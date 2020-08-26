@@ -52,9 +52,6 @@ public class RepColorCon extends FilterCon {
     }
 
     public void initialize(){
-        remove.setOnAction(t -> {
-            delete();
-        });
     }
 
 }

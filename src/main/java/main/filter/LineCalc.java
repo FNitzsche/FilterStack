@@ -29,7 +29,7 @@ public class LineCalc extends Filter {
     @Override
     public String toString(){
         LineCon con = screen.getController(LineCon.class);
-        return "Line " + id + ", Iterationen: " + con.getIt();
+        return (activ? "ACTIVE : ": "") + "Line " + id + ", Iterationen: " + con.getIt();
     }
 
     Random random = new Random();

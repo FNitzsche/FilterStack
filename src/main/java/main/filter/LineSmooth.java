@@ -96,6 +96,6 @@ public class LineSmooth extends Filter {
     @Override
     public String toString(){
         SmoothTwoCon con = screen.getController(SmoothTwoCon.class);
-        return "Smooth Two " + id + ", Iterationen: " + con.getIt();
+        return (activ? "ACTIVE : ": "") + "Smooth Two " + id + ", Iterationen: " + con.getIt();
     }
 }

@@ -136,6 +136,6 @@ public class CellCalc extends Filter {
 
     @Override
     public String toString(){
-        return "Voronoi " + id + ", Cells: " + screen.getController(VoronoiCon.class).getCellCount();
+        return (activ? "ACTIVE : ": "") + "Voronoi " + id + ", Cells: " + screen.getController(VoronoiCon.class).getCellCount();
     }
 }

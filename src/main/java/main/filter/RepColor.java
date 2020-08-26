@@ -28,7 +28,7 @@ public class RepColor extends Filter {
     @Override
     public String toString(){
         RepColorCon con = screen.getController(RepColorCon.class);
-        return "Specific Colors " + id + ", R: " + con.getColor()[0] + ", G: " + con.getColor()[1] + ", B: " + con.getColor()[2];
+        return (activ? "ACTIVE : ": "") + "Specific Colors " + id + ", R: " + con.getColor()[0] + ", G: " + con.getColor()[1] + ", B: " + con.getColor()[2];
     }
 
     public float[][][] calc(float[] color, float maxDist, float[] repColor, float[][][] img, int resX, int resY){

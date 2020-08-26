@@ -33,6 +33,10 @@ public class MainScreenCon {
     @FXML
     ListView<Filter> filterList;
     @FXML
+    Button removeFilter;
+    @FXML
+    ToggleButton actFilter;
+    @FXML
     Button apply;
     @FXML
     Button up;
@@ -88,6 +92,8 @@ public class MainScreenCon {
             path.setText(fileChooser.showOpenDialog(stage).getAbsolutePath());
             loadImage();
         });
+        removeFilter.setOnAction(t -> filterList.getSelectionModel().getSelectedItem().deleteFilter());
+        actFilter.setOnAction(t -> filterList.getSelectionModel().getSelectedItem().activ = actFilter.isSelected());
 
         startDrawing();
     }
@@ -95,6 +101,7 @@ public class MainScreenCon {
     private void viewSelected(){
         container.getChildren().clear();
         container.getChildren().add(filterList.getSelectionModel().getSelectedItem().screen.getParent());
+        actFilter.setSelected(filterList.getSelectionModel().getSelectedItem().activ);
     }
 
 
@@ -136,6 +143,7 @@ public class MainScreenCon {
             public void run() {
                 Image img = draw(imgprev);
                 Platform.runLater(() -> preview.getGraphicsContext2D().drawImage(img, 0, 0));
+                Platform.runLater(() -> filterList.refresh());
             }
         };
 
@@ -204,7 +212,7 @@ public class MainScreenCon {
                     progressB.setProgress(0);
                 });
                 for (Filter filter: filterList.getItems()){
-                    imgArray = filter.run(imgArray, (int)img.getWidth(), (int)img.getHeight(), delta);
+                    imgArray = filter.runRun(imgArray, (int)img.getWidth(), (int)img.getHeight(), delta);
                     count++;
                     int finalCount = count;
                     Platform.runLater(() -> {

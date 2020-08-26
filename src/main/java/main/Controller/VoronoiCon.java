@@ -53,9 +53,6 @@ public class VoronoiCon extends FilterCon {
     }
 
     public void initialize(){
-        remove.setOnAction(t -> {
-            delete();
-        });
     }
 
 

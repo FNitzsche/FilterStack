@@ -95,6 +95,6 @@ public class FlatCalc extends Filter {
     @Override
     public String toString(){
         SmoothOneCon con = screen.getController(SmoothOneCon.class);
-        return "Smooth " + id + ", Iterationen: " + con.getIt();
+        return (activ? "ACTIVE : ": "") + "Smooth " + id + ", Iterationen: " + con.getIt();
     }
 }

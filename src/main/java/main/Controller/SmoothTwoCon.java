@@ -40,8 +40,5 @@ public class SmoothTwoCon extends FilterCon{
     }
 
     public void initialize(){
-        remove.setOnAction(t -> {
-            delete();
-        });
     }
 }

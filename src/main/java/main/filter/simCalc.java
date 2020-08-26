@@ -96,6 +96,6 @@ public class simCalc extends Filter {
     @Override
     public String toString(){
         ReducedColorCon con = screen.getController(ReducedColorCon.class);
-        return "Reduced Color " + id + ", R: " + con.getRed() + ", G: " + con.getGreen() + ", B: " + con.getBlue();
+        return (activ? "ACTIVE : ": "") + "Reduced Color " + id + ", R: " + con.getRed() + ", G: " + con.getGreen() + ", B: " + con.getBlue();
     }
 }

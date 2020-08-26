@@ -47,10 +47,6 @@ public class SpecificColorCon extends FilterCon{
     }
 
     public void initialize(){
-        remove.setOnAction(t -> {
-            delete();
-        });
-
         addC.setOnAction(t -> addColor());
         remC.setOnAction(t -> removeColor());
     }

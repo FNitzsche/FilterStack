@@ -29,7 +29,7 @@ public class SpecificColors extends Filter {
     @Override
     public String toString(){
         SpecificColorCon con = screen.getController(SpecificColorCon.class);
-        return "Specific Colors " + id + ", Count: " + con.getColors().length;
+        return (activ? "ACTIVE : ": "") + "Specific Colors " + id + ", Count: " + con.getColors().length;
     }
 
 

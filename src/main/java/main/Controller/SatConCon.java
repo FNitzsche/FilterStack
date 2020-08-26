@@ -35,9 +35,6 @@ public class SatConCon extends FilterCon {
     }
 
     public void initialize(){
-        remove.setOnAction(t -> {
-            delete();
-        });
     }
 
 }

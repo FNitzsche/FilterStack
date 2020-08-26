@@ -34,8 +34,5 @@ public class SmoothOneCon extends FilterCon {
     }
 
     public void initialize(){
-        remove.setOnAction(t -> {
-            delete();
-        });
     }
 }

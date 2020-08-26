@@ -31,7 +31,7 @@ public class SatConCalc extends Filter {
     @Override
     public String toString(){
         SatConCon con = screen.getController(SatConCon.class);
-        return "Specific Colors " + id + ", Sat: " + con.getSat() + ", Con: " + con.getCon();
+        return (activ? "ACTIVE : ": "") + "Saturation&Contrast " + id + ", Sat: " + con.getSat() + ", Con: " + con.getCon();
     }
 
     public float[][][] calc(float sat, float con, float[][][] img, int resX, int resY){

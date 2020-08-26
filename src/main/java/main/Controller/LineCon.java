@@ -58,9 +58,6 @@ public class LineCon extends FilterCon {
     }
 
     public void initialize(){
-        remove.setOnAction(t -> {
-            delete();
-        });
     }
 
 
