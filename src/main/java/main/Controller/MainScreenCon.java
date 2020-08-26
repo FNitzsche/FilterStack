@@ -119,20 +119,22 @@ public class MainScreenCon {
     }
 
     public Image draw(float[][][] tmp){
-        if (tmp.length > 0) {
+        if (tmp!= null && tmp.length > 0) {
             int resX = tmp.length;
             int rexY = tmp[0].length;
             WritableImage wimg = new WritableImage(resX, rexY);
 
             for (int i = 0; i < resX; i++) {
                 for (int j = 0; j < rexY; j++) {
-                    wimg.getPixelWriter().setColor(i, j, Color.color(tmp[i][j][0], tmp[i][j][1], tmp[i][j][2]));
+                    wimg.getPixelWriter().setColor(i, j, Color.color(Math.max(0, Math.min(1, tmp[i][j][0])),Math.max(0, Math.min(1, tmp[i][j][1])), Math.max(0, Math.min(1,tmp[i][j][2]))));
                 }
             }
 
             return wimg;
+        } else {
+            System.out.println("no Image");
         }
-        return new WritableImage(0, 0);
+        return null;
     }
 
     ScheduledExecutorService exe;
@@ -142,7 +144,9 @@ public class MainScreenCon {
             @Override
             public void run() {
                 Image img = draw(imgprev);
-                Platform.runLater(() -> preview.getGraphicsContext2D().drawImage(img, 0, 0));
+                if (img != null) {
+                    Platform.runLater(() -> preview.getGraphicsContext2D().drawImage(img, 0, 0));
+                }
                 Platform.runLater(() -> filterList.refresh());
             }
         };
@@ -169,11 +173,16 @@ public class MainScreenCon {
         } catch (Exception e){
             System.out.println(e);
         }
+        if(null == tmpP){
+            System.out.println("no Preview");
+        }
         if (tmp != null){
             original = tmp;
             prevImage = tmpP;
         }
-        imgprev = imgToArray(prevImage);
+        if (prevImage != null) {
+            imgprev = imgToArray(prevImage);
+        }
     }
 
     public float[][][] imgToArray(Image img){
