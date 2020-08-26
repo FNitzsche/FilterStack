@@ -188,14 +188,26 @@ public class MainScreenCon {
         return ret;
     }
 
-    private void previewFilters(){
-        Runnable run = new Runnable() {
-            @Override
-            public void run() {
-                imgprev = applyFilters(prevImage, 1);
-            }
-        };
-        exeThread.execute(run);
+    private void previewFilters() {
+        if (prevImage != null){
+            Runnable run = new Runnable() {
+                @Override
+                public void run() {
+                    imgprev = applyFilters(prevImage, 1);
+
+                }
+            };
+            exeThread.execute(run);
+        } else {
+            Platform.runLater(new Runnable() {
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("No Image");
+                    alert.setHeaderText("load Image first");
+                    alert.showAndWait();
+                }
+            });
+        }
     }
 
     ExecutorService exeThread = Executors.newCachedThreadPool();
@@ -240,21 +252,32 @@ public class MainScreenCon {
     }
 
     private void saveImage(){
-        final String p = fileChooser.showSaveDialog(stage).getAbsolutePath();
-        Runnable run = new Runnable() {
-            @Override
-            public void run() {
-                float[][][] tmp = applyFilters(original, (float) original.getHeight()/(float)prevImage.getHeight());
-                Image img = draw(tmp);
+        if (original != null) {
+            final String p = fileChooser.showSaveDialog(stage).getAbsolutePath();
+            Runnable run = new Runnable() {
+                @Override
+                public void run() {
+                    float[][][] tmp = applyFilters(original, (float) original.getHeight() / (float) prevImage.getHeight());
+                    Image img = draw(tmp);
 
-                File file = new File(p + ".png");
-                try {
-                    ImageIO.write(SwingFXUtils.fromFXImage(img, null), "png", file);
-                } catch (Exception s) {
+                    File file = new File(p + ".png");
+                    try {
+                        ImageIO.write(SwingFXUtils.fromFXImage(img, null), "png", file);
+                    } catch (Exception s) {
+                    }
                 }
-            }
-        };
-        exeThread.execute(run);
+            };
+            exeThread.execute(run);
+        } else {
+            Platform.runLater(new Runnable() {
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("No Image");
+                    alert.setHeaderText("load Image first");
+                    alert.showAndWait();
+                }
+            });
+        }
     }
 
     private void moveUp(){
