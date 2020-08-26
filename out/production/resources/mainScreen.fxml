@@ -33,11 +33,20 @@
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="path">
+                              <TextField fx:id="path" prefWidth="500.0">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="320.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Button fx:id="search" layoutX="602.0" layoutY="35.0" mnemonicParsing="false" text="Suchen">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
                               <Button fx:id="load" mnemonicParsing="false" text="Laden">
                                  <font>
                                     <Font size="24.0" />

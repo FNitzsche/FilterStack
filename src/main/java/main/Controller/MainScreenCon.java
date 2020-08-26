@@ -11,6 +11,8 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import main.filter.*;
 import main.filter.assiClasses.Filter;
 
@@ -26,6 +28,8 @@ public class MainScreenCon {
     TextField path;
     @FXML
     Button load;
+    @FXML
+    Button search;
     @FXML
     ListView<Filter> filterList;
     @FXML
@@ -52,6 +56,12 @@ public class MainScreenCon {
     ProgressBar progressB;
 
     private float[][][] imgprev;
+    FileChooser fileChooser = new FileChooser();
+    Stage stage;
+
+    public MainScreenCon(Stage stage){
+        this.stage = stage;
+    }
 
 
     public void initialize(){
@@ -74,6 +84,10 @@ public class MainScreenCon {
         up.setOnAction(t -> moveUp());
         down.setOnAction(t -> moveDown());
         save.setOnAction(t -> saveImage());
+        search.setOnAction(t -> {
+            path.setText(fileChooser.showOpenDialog(stage).getAbsolutePath());
+            loadImage();
+        });
 
         startDrawing();
     }
@@ -218,13 +232,14 @@ public class MainScreenCon {
     }
 
     private void saveImage(){
+        final String p = fileChooser.showSaveDialog(stage).getAbsolutePath();
         Runnable run = new Runnable() {
             @Override
             public void run() {
                 float[][][] tmp = applyFilters(original, (float) original.getHeight()/(float)prevImage.getHeight());
                 Image img = draw(tmp);
 
-                File file = new File(path.getText().substring(0, path.getText().lastIndexOf('.')) + "_Bearbeitet.png");
+                File file = new File(p + ".png");
                 try {
                     ImageIO.write(SwingFXUtils.fromFXImage(img, null), "png", file);
                 } catch (Exception s) {
