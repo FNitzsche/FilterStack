@@ -27,11 +27,19 @@ public class SatConCon extends FilterCon {
     }
 
     public float getSat(){
-        return Float.parseFloat(sat.getText());
+        try {
+            float ret = Float.parseFloat((sat.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public float getCon(){
-        return Float.parseFloat(con.getText());
+        try {
+            float ret = Float.parseFloat((con.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public void initialize(){

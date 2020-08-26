@@ -29,15 +29,27 @@ public class ReducedColorCon extends FilterCon {
     }
 
     public int getRed(){
-        return Integer.parseInt(red.getText());
+        try {
+            int ret = Integer.parseInt((red.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public int getGreen(){
-        return Integer.parseInt(green.getText());
+        try {
+            int ret = Integer.parseInt((green.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public int getBlue(){
-        return Integer.parseInt(blue.getText());
+        try {
+            int ret = Integer.parseInt((blue.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public void initialize(){

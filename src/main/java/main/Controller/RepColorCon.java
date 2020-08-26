@@ -48,7 +48,11 @@ public class RepColorCon extends FilterCon {
     }
 
     public float getDist(){
-        return Float.parseFloat(distance.getText());
+        try {
+            float ret = Float.parseFloat((distance.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public void initialize(){

@@ -34,27 +34,51 @@ public class LineCon extends FilterCon {
     }
 
     public int getIt(){
-        return Integer.parseInt(iter.getText());
+        try {
+            int ret = Integer.parseInt((iter.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public float getRate(){
-        return Float.parseFloat(rate.getText());
+        try {
+            float ret = Float.parseFloat((rate.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public int getX(){
-        return Integer.parseInt(x.getText());
+        try {
+            int ret = Integer.parseInt((x.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public int getY(){
-        return Integer.parseInt(y.getText());
+        try {
+            int ret = Integer.parseInt((y.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public int getPoints(){
-        return Integer.parseInt(points.getText());
+        try {
+            int ret = Integer.parseInt((points.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public float getW(){
-        return Float.parseFloat(w.getText());
+        try {
+            float ret = Float.parseFloat((w.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public void initialize(){

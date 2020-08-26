@@ -26,11 +26,19 @@ public class SmoothOneCon extends FilterCon {
     }
 
     public int getIt(){
-        return Integer.parseInt(iter.getText());
+        try {
+            int ret = Integer.parseInt((iter.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public float getBorder(){
-        return Float.parseFloat(border.getText());
+        try {
+            float ret = Float.parseFloat((border.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public void initialize(){

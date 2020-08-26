@@ -33,23 +33,43 @@ public class VoronoiCon extends FilterCon {
     }
 
     public int getCellCount(){
-        return Integer.parseInt(count.getText());
+        try {
+            int ret = Integer.parseInt((count.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public int getXPos(){
-        return Integer.parseInt(xp.getText());
+        try {
+            int ret = Integer.parseInt((xp.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public int getYPos(){
-        return Integer.parseInt(yp.getText());
+        try {
+            int ret = Integer.parseInt((yp.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public int getW(){
-        return Integer.parseInt(w.getText());
+        try {
+            int ret = Integer.parseInt((w.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public int getH(){
-        return Integer.parseInt(h.getText());
+        try {
+            int ret = Integer.parseInt((h.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
     }
 
     public void initialize(){
