@@ -79,6 +79,7 @@ public class MainScreenCon {
         addType.getItems().add("Specific Colors");
         addType.getItems().add("Replace Color");
         addType.getItems().add("Saturation&Contrast");
+        addType.getItems().add("Hue-Keep");
         addType.getSelectionModel().select(0);
 
         add.setOnAction(t -> addFilter());
@@ -115,6 +116,7 @@ public class MainScreenCon {
             case "Specific Colors": filterList.getItems().add(new SpecificColors(filterList, container));break;
             case "Replace Color": filterList.getItems().add(new RepColor(filterList, container));break;
             case "Saturation&Contrast": filterList.getItems().add(new SatConCalc(filterList, container));break;
+            case "Hue-Keep": filterList.getItems().add(new HueKeepCalc(filterList, container));break;
         }
     }
 
