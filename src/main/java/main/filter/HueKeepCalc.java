@@ -2,8 +2,7 @@ package main.filter;
 
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
-import main.Controller.HueKeepCon;
-import main.Controller.RepColorCon;
+import main.Controller.FilterController.HueKeepCon;
 import main.FXMLLoad;
 import main.filter.assiClasses.Filter;
 

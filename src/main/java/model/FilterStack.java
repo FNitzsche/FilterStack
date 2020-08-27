@@ -24,7 +24,8 @@ public class FilterStack {
     boolean ran = false;
     float[][][] lastImage;
 
-    public FilterStack(){
+    public FilterStack(ExecutorService exeC){
+        this.exeC = exeC;
         stacks.add(this);
     }
 

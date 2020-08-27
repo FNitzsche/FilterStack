@@ -1,4 +1,4 @@
-package main.Controller;
+package main.Controller.FilterController;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,65 +8,74 @@ import javafx.scene.layout.HBox;
 import main.FXMLLoad;
 import main.filter.assiClasses.Filter;
 
-public class VoronoiCon extends FilterCon {
-
+public class LineCon extends FilterCon {
     @FXML
-    private TextField count;
+    private TextField iter;
     @FXML
-    private TextField xp;
+    private TextField rate;
     @FXML
-    private TextField yp;
+    private TextField x;
+    @FXML
+    private TextField y;
+    @FXML
+    private TextField points;
     @FXML
     private TextField w;
-    @FXML
-    private TextField h;
     @FXML
     private Button remove;
 
 
 
-    public VoronoiCon(ListView view, FXMLLoad load, Filter parent, HBox container){
+    public LineCon(ListView view, FXMLLoad load, Filter parent, HBox container){
         this.view = view;
         this.load = load;
         this.parent = parent;
         this.container = container;
     }
 
-    public int getCellCount(){
+    public int getIt(){
         try {
-            int ret = Integer.parseInt((count.getText()));
+            int ret = Integer.parseInt((iter.getText()));
             return ret;
         } catch (Exception e){}
         return 0;
     }
 
-    public int getXPos(){
+    public float getRate(){
         try {
-            int ret = Integer.parseInt((xp.getText()));
+            float ret = Float.parseFloat((rate.getText()));
             return ret;
         } catch (Exception e){}
         return 0;
     }
 
-    public int getYPos(){
+    public int getX(){
         try {
-            int ret = Integer.parseInt((yp.getText()));
+            int ret = Integer.parseInt((x.getText()));
             return ret;
         } catch (Exception e){}
         return 0;
     }
 
-    public int getW(){
+    public int getY(){
         try {
-            int ret = Integer.parseInt((w.getText()));
+            int ret = Integer.parseInt((y.getText()));
             return ret;
         } catch (Exception e){}
         return 0;
     }
 
-    public int getH(){
+    public int getPoints(){
         try {
-            int ret = Integer.parseInt((h.getText()));
+            int ret = Integer.parseInt((points.getText()));
+            return ret;
+        } catch (Exception e){}
+        return 0;
+    }
+
+    public float getW(){
+        try {
+            float ret = Float.parseFloat((w.getText()));
             return ret;
         } catch (Exception e){}
         return 0;

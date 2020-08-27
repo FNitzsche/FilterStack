@@ -1,4 +1,4 @@
-package main.Controller;
+package main.Controller.MainController;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -59,9 +59,11 @@ public class MainScreenCon {
     @FXML
     ProgressBar progressB;
 
+    LoadController loadController;
+
     private float[][][] imgprev;
-    FileChooser fileChooser = new FileChooser();
-    Stage stage;
+    static FileChooser fileChooser = new FileChooser();
+    static Stage stage;
 
     public MainScreenCon(Stage stage){
         this.stage = stage;
@@ -69,6 +71,9 @@ public class MainScreenCon {
 
 
     public void initialize(){
+
+        loadController = new LoadController(path, search, load, preview);
+
         imgprev = new float[(int)preview.getWidth()][(int)preview.getHeight()][3];
 
         addType.getItems().add("Voronoi");
@@ -84,15 +89,11 @@ public class MainScreenCon {
 
         add.setOnAction(t -> addFilter());
         filterList.setOnMouseClicked(t -> viewSelected());
-        load.setOnAction(t -> loadImage());
         apply.setOnAction(t -> previewFilters());
         up.setOnAction(t -> moveUp());
         down.setOnAction(t -> moveDown());
         save.setOnAction(t -> saveImage());
-        search.setOnAction(t -> {
-            path.setText(fileChooser.showOpenDialog(stage).getAbsolutePath());
-            loadImage();
-        });
+
         removeFilter.setOnAction(t -> filterList.getSelectionModel().getSelectedItem().deleteFilter());
         actFilter.setOnAction(t -> filterList.getSelectionModel().getSelectedItem().activ = actFilter.isSelected());
 
@@ -165,27 +166,7 @@ public class MainScreenCon {
     Image original;
     Image prevImage;
 
-    private void loadImage(){
-        Image tmp = null;
-        Image tmpP = null;
-        try {
-            URL url = new URL("file:" + path.getText());
-            tmp = new Image(url.toString());
-            tmpP = new Image(url.toString(), preview.getWidth(), preview.getHeight(), true, false);
-        } catch (Exception e){
-            System.out.println(e);
-        }
-        if(null == tmpP){
-            System.out.println("no Preview");
-        }
-        if (tmp != null){
-            original = tmp;
-            prevImage = tmpP;
-        }
-        if (prevImage != null) {
-            imgprev = imgToArray(prevImage);
-        }
-    }
+
 
     public float[][][] imgToArray(Image img){
         float[][][] ret = new float[(int)img.getWidth()][(int)img.getHeight()][3];

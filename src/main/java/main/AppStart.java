@@ -2,7 +2,7 @@ package main;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import main.Controller.MainScreenCon;
+import main.Controller.MainController.MainScreenCon;
 
 public class AppStart extends Application {
 

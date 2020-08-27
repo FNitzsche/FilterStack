@@ -1,4 +1,4 @@
-package main.Controller;
+package main.Controller.FilterController;
 
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;

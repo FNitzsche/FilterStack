@@ -1,4 +1,4 @@
-package main.Controller;
+package main.Controller.FilterController;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,35 +8,34 @@ import javafx.scene.layout.HBox;
 import main.FXMLLoad;
 import main.filter.assiClasses.Filter;
 
-public class SatConCon extends FilterCon {
-
+public class SmoothOneCon extends FilterCon {
     @FXML
-    private TextField sat;
+    private TextField iter;
     @FXML
-    private TextField con;
+    private TextField border;
     @FXML
     private Button remove;
 
 
 
-    public SatConCon(ListView view, FXMLLoad load, Filter parent, HBox container){
+    public SmoothOneCon(ListView view, FXMLLoad load, Filter parent, HBox container){
         this.view = view;
         this.load = load;
         this.parent = parent;
         this.container = container;
     }
 
-    public float getSat(){
+    public int getIt(){
         try {
-            float ret = Float.parseFloat((sat.getText()));
+            int ret = Integer.parseInt((iter.getText()));
             return ret;
         } catch (Exception e){}
         return 0;
     }
 
-    public float getCon(){
+    public float getBorder(){
         try {
-            float ret = Float.parseFloat((con.getText()));
+            float ret = Float.parseFloat((border.getText()));
             return ret;
         } catch (Exception e){}
         return 0;
@@ -44,5 +43,4 @@ public class SatConCon extends FilterCon {
 
     public void initialize(){
     }
-
 }

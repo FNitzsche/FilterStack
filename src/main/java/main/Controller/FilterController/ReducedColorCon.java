@@ -1,4 +1,4 @@
-package main.Controller;
+package main.Controller.FilterController;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,44 +8,45 @@ import javafx.scene.layout.HBox;
 import main.FXMLLoad;
 import main.filter.assiClasses.Filter;
 
-public class SmoothTwoCon extends FilterCon{
+public class ReducedColorCon extends FilterCon {
+
     @FXML
-    private TextField iter;
+    private TextField red;
     @FXML
-    private TextField border;
+    private TextField green;
     @FXML
-    private TextField pixelC;
+    private TextField blue;
     @FXML
     private Button remove;
 
 
 
-    public SmoothTwoCon(ListView view, FXMLLoad load, Filter parent, HBox container){
+    public ReducedColorCon(ListView view, FXMLLoad load, Filter parent, HBox container){
         this.view = view;
         this.load = load;
         this.parent = parent;
         this.container = container;
     }
 
-    public int getIt(){
+    public int getRed(){
         try {
-            int ret = Integer.parseInt((iter.getText()));
+            int ret = Integer.parseInt((red.getText()));
             return ret;
         } catch (Exception e){}
         return 0;
     }
 
-    public float getBorder(){
+    public int getGreen(){
         try {
-            float ret = Float.parseFloat((border.getText()));
+            int ret = Integer.parseInt((green.getText()));
             return ret;
         } catch (Exception e){}
         return 0;
     }
 
-    public int getPixelC(){
+    public int getBlue(){
         try {
-            int ret = Integer.parseInt((pixelC.getText()));
+            int ret = Integer.parseInt((blue.getText()));
             return ret;
         } catch (Exception e){}
         return 0;
@@ -53,4 +54,5 @@ public class SmoothTwoCon extends FilterCon{
 
     public void initialize(){
     }
+
 }

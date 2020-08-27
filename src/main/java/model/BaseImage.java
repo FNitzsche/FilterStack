@@ -17,7 +17,7 @@ public class BaseImage {
     float[][][] fullSize;
     float[][][] preSize;
 
-    boolean loaded = false;
+    public boolean loaded = false;
 
     public BaseImage(String path, int preResX, int preResY){
         this.path = path;

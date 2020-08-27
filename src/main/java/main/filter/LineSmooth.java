@@ -2,7 +2,7 @@ package main.filter;
 
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
-import main.Controller.SmoothTwoCon;
+import main.Controller.FilterController.SmoothTwoCon;
 import main.FXMLLoad;
 import main.filter.assiClasses.Filter;
 

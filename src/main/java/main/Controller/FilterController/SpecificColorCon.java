@@ -1,4 +1,4 @@
-package main.Controller;
+package main.Controller.FilterController;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

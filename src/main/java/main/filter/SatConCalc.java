@@ -2,13 +2,10 @@ package main.filter;
 
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
-import main.Controller.MainScreenCon;
-import main.Controller.SatConCon;
-import main.Controller.SpecificColorCon;
+import main.Controller.FilterController.SatConCon;
 import main.FXMLLoad;
 import main.filter.assiClasses.Filter;
 
-import java.awt.event.MouseAdapter;
 import java.util.Arrays;
 
 public class SatConCalc extends Filter {

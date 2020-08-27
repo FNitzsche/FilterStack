@@ -1,6 +1,6 @@
 package main.filter.assiClasses;
 
-import main.Controller.FilterCon;
+import main.Controller.FilterController.FilterCon;
 import main.FXMLLoad;
 
 public abstract class Filter {
