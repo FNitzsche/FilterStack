@@ -175,7 +175,12 @@
                                     <TextField fx:id="stackName" />
                                  </children>
                               </VBox>
-                              <ChoiceBox fx:id="baseImage" prefWidth="300.0" GridPane.rowIndex="1" />
+                              <VBox alignment="CENTER" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label text="Base-Image des Stacks:" />
+                                    <ChoiceBox fx:id="baseImage" prefWidth="300.0" />
+                                 </children>
+                              </VBox>
                            </children>
                         </GridPane>
                      </children>

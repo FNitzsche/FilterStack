@@ -1,5 +1,6 @@
 package model;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import main.filter.assiClasses.Filter;
@@ -9,17 +10,17 @@ import java.util.concurrent.ExecutorService;
 
 public class FilterStack {
 
-    static ArrayList<FilterStack> stacks = new ArrayList<>();
+    public static ObservableList<FilterStack> stacks = FXCollections.observableList(new ArrayList<FilterStack>());
     static ExecutorService exeC;
 
-    BaseImage baseImage;
+     public BaseImage baseImage;
 
-    String stackName;
+    public String stackName = "empty Stack";
 
     ArrayList<FilterStack> containing = new ArrayList<>();
     ArrayList<FilterStack> contained = new ArrayList<>();
 
-    ArrayList<Filter> filters = new ArrayList<>();
+    public ObservableList<Filter> filters = FXCollections.observableList(new ArrayList<Filter>());
 
     boolean ran = false;
     float[][][] lastImage;
@@ -31,7 +32,9 @@ public class FilterStack {
 
     public void delete(){
         stacks.remove(this);
-        baseImage.uses.remove(this);
+        if (baseImage != null) {
+            baseImage.uses.remove(this);
+        }
     }
 
     public ArrayList<FilterStack> getContainable(){
@@ -103,6 +106,11 @@ public class FilterStack {
         for (FilterStack stack: stacks){
             stack.ran = false;
         }
+    }
+
+    @Override
+    public String toString(){
+        return stackName;
     }
 
 }

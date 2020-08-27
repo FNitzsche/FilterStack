@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import main.filter.*;
 import main.filter.assiClasses.Filter;
 import model.BaseImage;
+import model.FilterStack;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -35,6 +36,8 @@ public class MainScreenCon {
 
     //Settings
     @FXML
+    TextField stackName;
+    @FXML
     ListView<Filter> filterList;
     @FXML
     Button removeFilter;
@@ -52,6 +55,12 @@ public class MainScreenCon {
     GridPane gridSettings;
     @FXML
     ChoiceBox<BaseImage> baseImage;
+    @FXML
+    ListView<FilterStack> settingsStackList;
+    @FXML
+    Button addStack;
+    @FXML
+    Button deleteStack;
 
     //Preview
     @FXML
@@ -67,7 +76,10 @@ public class MainScreenCon {
     @FXML
     ProgressBar progressB;
 
+    static ExecutorService exeThread = Executors.newCachedThreadPool();
+
     LoadController loadController;
+    SettingsController settingsController;
 
     private float[][][] imgprev;
     static FileChooser fileChooser = new FileChooser();
@@ -81,6 +93,8 @@ public class MainScreenCon {
     public void initialize(){
 
         loadController = new LoadController(path, search, load, preview, baseImage);
+        settingsController = new SettingsController(container, stackName, baseImage, settingsStackList, addStack, deleteStack, filterList, up, down, removeFilter, actFilter, add, addType);
+
 
         imgprev = new float[(int)preview.getWidth()][(int)preview.getHeight()][3];
 
@@ -95,38 +109,14 @@ public class MainScreenCon {
         addType.getItems().add("Hue-Keep");
         addType.getSelectionModel().select(0);
 
-        add.setOnAction(t -> addFilter());
-        filterList.setOnMouseClicked(t -> viewSelected());
+
         apply.setOnAction(t -> previewFilters());
-        up.setOnAction(t -> moveUp());
-        down.setOnAction(t -> moveDown());
         save.setOnAction(t -> saveImage());
 
         removeFilter.setOnAction(t -> filterList.getSelectionModel().getSelectedItem().deleteFilter());
         actFilter.setOnAction(t -> filterList.getSelectionModel().getSelectedItem().activ = actFilter.isSelected());
 
         startDrawing();
-    }
-
-    private void viewSelected(){
-        container.getChildren().clear();
-        container.getChildren().add(filterList.getSelectionModel().getSelectedItem().screen.getParent());
-        actFilter.setSelected(filterList.getSelectionModel().getSelectedItem().activ);
-    }
-
-
-    private void addFilter(){
-        switch (addType.getValue()){
-            case "Voronoi": filterList.getItems().add(new CellCalc(filterList, container));break;
-            case "Limit Colors": filterList.getItems().add(new simCalc(filterList, container));break;
-            case "Smooth": filterList.getItems().add(new FlatCalc(filterList, container));break;
-            case "Smooth2": filterList.getItems().add(new LineSmooth(filterList, container));break;
-            case "Lines": filterList.getItems().add(new LineCalc(filterList, container));break;
-            case "Specific Colors": filterList.getItems().add(new SpecificColors(filterList, container));break;
-            case "Replace Color": filterList.getItems().add(new RepColor(filterList, container));break;
-            case "Saturation&Contrast": filterList.getItems().add(new SatConCalc(filterList, container));break;
-            case "Hue-Keep": filterList.getItems().add(new HueKeepCalc(filterList, container));break;
-        }
     }
 
     public Image draw(float[][][] tmp){
@@ -210,8 +200,6 @@ public class MainScreenCon {
         }
     }
 
-    ExecutorService exeThread = Executors.newCachedThreadPool();
-
     private float[][][] applyFilters(Image img, float delta){
         Task<float[][][]> task = new Task<float[][][]>() {
             @Override
@@ -277,24 +265,6 @@ public class MainScreenCon {
                     alert.showAndWait();
                 }
             });
-        }
-    }
-
-    private void moveUp(){
-        Filter filter = filterList.getSelectionModel().getSelectedItem();
-        if (filter != null && filterList.getItems().indexOf(filter)>0){
-            int index = filterList.getItems().indexOf(filter);
-            filterList.getItems().set(index, filterList.getItems().get(index-1));
-            filterList.getItems().set(index -1, filter);
-        }
-    }
-
-    private void moveDown(){
-        Filter filter = filterList.getSelectionModel().getSelectedItem();
-        if (filter != null && filterList.getItems().indexOf(filter)<filterList.getItems().size()-1){
-            int index = filterList.getItems().indexOf(filter);
-            filterList.getItems().set(index, filterList.getItems().get(index+1));
-            filterList.getItems().set(index +1, filter);
         }
     }
 }
