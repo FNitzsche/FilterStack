@@ -75,4 +75,9 @@ public class BaseImage {
         return fullSize.clone();
     }
 
+    @Override
+    public String toString(){
+        return path.substring(path.lastIndexOf('\\'), path.length());
+    }
+
 }
