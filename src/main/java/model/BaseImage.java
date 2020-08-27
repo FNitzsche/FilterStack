@@ -1,13 +1,15 @@
 package model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
 import java.net.URL;
 import java.util.ArrayList;
 
-public class BaseImage {
+public class BaseImage implements Viewable{
 
-    static ArrayList<BaseImage> bases = new ArrayList<>();
+    public static ObservableList<BaseImage> bases = FXCollections.observableList(new ArrayList<>());
     ArrayList<FilterStack> uses = new ArrayList<>();
 
     Image original;
@@ -68,11 +70,11 @@ public class BaseImage {
     }
 
     public float[][][] getPreSize(){
-        return preSize.clone();
+        return imgToArray(preview);
     }
 
     public float[][][] getFullSize(){
-        return fullSize.clone();
+        return imgToArray(original);
     }
 
     @Override
@@ -80,4 +82,15 @@ public class BaseImage {
         return path.substring(path.lastIndexOf('\\'), path.length());
     }
 
+    @Override
+    public Image showImage(boolean fullRun, int resX, int resY, float delta) {
+        if (!preview.isError() && !original.isError()) {
+            if (!fullRun) {
+                return preview;
+            } else {
+                return original;
+            }
+        }
+        return null;
+    }
 }

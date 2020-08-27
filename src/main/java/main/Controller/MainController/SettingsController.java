@@ -92,8 +92,9 @@ public class SettingsController {
     }
 
     private void deleteFilter(){
-        settingsStackList.getSelectionModel().getSelectedItem().filters.remove(filterList.getSelectionModel().getSelectedItem());
-        filterList.getSelectionModel().getSelectedItem().deleteFilter();
+        Filter filter = filterList.getSelectionModel().getSelectedItem();
+        settingsStackList.getSelectionModel().getSelectedItem().filters.remove(filter);
+        filter.deleteFilter();
     }
 
     private void viewSelectedFilter(){
