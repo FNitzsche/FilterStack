@@ -15,6 +15,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.filter.*;
 import main.filter.assiClasses.Filter;
+import model.BaseImage;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -24,20 +25,21 @@ import java.util.concurrent.*;
 
 public class MainScreenCon {
 
+    //Load
     @FXML
     TextField path;
     @FXML
     Button load;
     @FXML
     Button search;
+
+    //Settings
     @FXML
     ListView<Filter> filterList;
     @FXML
     Button removeFilter;
     @FXML
     ToggleButton actFilter;
-    @FXML
-    Button apply;
     @FXML
     Button up;
     @FXML
@@ -47,9 +49,15 @@ public class MainScreenCon {
     @FXML
     ChoiceBox<String> addType;
     @FXML
+    GridPane gridSettings;
+    @FXML
+    ChoiceBox<BaseImage> baseImage;
+
+    //Preview
+    @FXML
     Button save;
     @FXML
-    GridPane gridSettings;
+    Button apply;
     @FXML
     Canvas preview;
     @FXML
@@ -72,7 +80,7 @@ public class MainScreenCon {
 
     public void initialize(){
 
-        loadController = new LoadController(path, search, load, preview);
+        loadController = new LoadController(path, search, load, preview, baseImage);
 
         imgprev = new float[(int)preview.getWidth()][(int)preview.getHeight()][3];
 

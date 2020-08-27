@@ -18,11 +18,12 @@ public class LoadController {
     Canvas preview;
     ChoiceBox<BaseImage> bases;
 
-    public LoadController(TextField path, Button search, Button load, Canvas preview){
+    public LoadController(TextField path, Button search, Button load, Canvas preview, ChoiceBox<BaseImage> bases){
         this.path = path;
         this.search = search;
         this.load = load;
         this.preview = preview;
+        this.bases = bases;
         load.setOnAction(t -> loadImage());
         search.setOnAction(t -> {
             path.setText(MainScreenCon.fileChooser.showOpenDialog(MainScreenCon.stage).getAbsolutePath());
