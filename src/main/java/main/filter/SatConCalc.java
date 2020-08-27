@@ -20,7 +20,7 @@ public class SatConCalc extends Filter {
     }
 
     @Override
-    public float[][][] run(float[][][] img, int resX, int resY, float delta) {
+    public float[][][] run(float[][][] img, int resX, int resY, float delta, boolean fullRun) {
         SatConCon con = screen.getController(SatConCon.class);
         return calc(con.getSat(), con.getCon(), img, resX, resY);
     }

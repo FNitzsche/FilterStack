@@ -8,9 +8,9 @@ public abstract class Filter {
     public FXMLLoad screen = null;
     public boolean activ = true;
 
-    public float[][][] runRun(float[][][] img, int resX, int resY, float delta){
+    public float[][][] runRun(float[][][] img, int resX, int resY, float delta, boolean fullRun){
         if (activ){
-            return run(img, resX, resY, delta);
+            return run(img, resX, resY, delta, fullRun);
         }
         return img;
     }
@@ -19,5 +19,5 @@ public abstract class Filter {
         screen.getController(FilterCon.class).delete();
     }
     
-    public abstract float[][][] run(float[][][] img, int resX, int resY, float delta);
+    public abstract float[][][] run(float[][][] img, int resX, int resY, float delta, boolean fullRun);
 }

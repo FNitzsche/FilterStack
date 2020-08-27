@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="blackpaneborder" stylesheets="@screen.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <Label text="Stack to merge">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="image" prefWidth="250.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="12.0" layoutY="12.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <Label text="Mergemode">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="mode" prefWidth="250.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="12.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <CheckBox fx:id="useMask" layoutX="322.0" layoutY="49.0" mnemonicParsing="false" text="use Mask" textFill="WHITE" />
+            <ChoiceBox fx:id="mask" prefWidth="250.0" />
+            <CheckBox fx:id="sat" mnemonicParsing="false" text="use Saturation" textFill="WHITE" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <Label text="min Value for 1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="value" text="0.1" />
+            <CheckBox fx:id="invert" mnemonicParsing="false" text="Invert" textFill="WHITE" />
+            <CheckBox fx:id="con" mnemonicParsing="false" text="continuous" textFill="WHITE" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

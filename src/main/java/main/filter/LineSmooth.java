@@ -88,7 +88,7 @@ public class LineSmooth extends Filter {
 
 
     @Override
-    public float[][][] run(float[][][] img, int resX, int resY, float delta) {
+    public float[][][] run(float[][][] img, int resX, int resY, float delta, boolean fullRun) {
         SmoothTwoCon con = screen.getController(SmoothTwoCon.class);
         return multiCalc(con.getIt(), con.getPixelC(), con.getBorder(), img, resX, resY);
     }

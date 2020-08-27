@@ -87,7 +87,7 @@ public class FlatCalc extends Filter {
     }
 
     @Override
-    public float[][][] run(float[][][] img, int resX, int resY, float delta) {
+    public float[][][] run(float[][][] img, int resX, int resY, float delta, boolean fullRun) {
         SmoothOneCon con = screen.getController(SmoothOneCon.class);
         return multiCalc(con.getIt(), con.getBorder(), img, resX, resY);
     }

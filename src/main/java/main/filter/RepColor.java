@@ -20,7 +20,7 @@ public class RepColor extends Filter {
     }
 
     @Override
-    public float[][][] run(float[][][] img, int resX, int resY, float delta) {
+    public float[][][] run(float[][][] img, int resX, int resY, float delta, boolean fullRun) {
         RepColorCon con = screen.getController(RepColorCon.class);
         return calc(con.getColor(), con.getDist(), con.getRepColor(), img, resX, resY);
     }

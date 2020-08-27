@@ -20,7 +20,7 @@ public class HueKeepCalc extends Filter {
     }
 
     @Override
-    public float[][][] run(float[][][] img, int resX, int resY, float delta) {
+    public float[][][] run(float[][][] img, int resX, int resY, float delta, boolean fullRun) {
         HueKeepCon con = screen.getController(HueKeepCon.class);
         return calc(con.getHue(), con.getDist(), img, resX, resY);
     }

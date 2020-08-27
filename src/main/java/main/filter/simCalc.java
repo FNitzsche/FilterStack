@@ -88,7 +88,7 @@ public class simCalc extends Filter {
     }
 
     @Override
-    public float[][][] run(float[][][] img, int resX, int resY, float delta) {
+    public float[][][] run(float[][][] img, int resX, int resY, float delta, boolean fullRun) {
         ReducedColorCon con = screen.getController(ReducedColorCon.class);
         return cell(con.getRed(), con.getGreen(), con.getBlue(), img, resX, resY);
     }

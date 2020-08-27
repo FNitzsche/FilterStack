@@ -116,7 +116,7 @@ public class FilterStack implements Viewable{
                 }
                 float toAdd = 1f / filters.size();
                 for (Filter filter : filters) {
-                    img = filter.runRun(img, resX, resY, delta);
+                    img = filter.runRun(img, resX, resY, delta, fullRun);
                     filtersFinished += toAdd;
                 }
                 lastImage = img;

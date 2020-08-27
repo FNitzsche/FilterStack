@@ -21,7 +21,7 @@ public class SpecificColors extends Filter {
     }
 
     @Override
-    public float[][][] run(float[][][] img, int resX, int resY, float delta) {
+    public float[][][] run(float[][][] img, int resX, int resY, float delta, boolean fullRun) {
         SpecificColorCon con = screen.getController(SpecificColorCon.class);
         return calc(con.getColors(), img, resX, resY);
     }

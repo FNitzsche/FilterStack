@@ -126,7 +126,7 @@ public class CellCalc extends Filter {
     }
 
     @Override
-    public float[][][] run(float[][][] img, int resX, int resY, float delta) {
+    public float[][][] run(float[][][] img, int resX, int resY, float delta, boolean fullRun) {
         VoronoiCon con = screen.getController(VoronoiCon.class);
         return cell(con.getCellCount(), img, resX, resY, (int)(con.getXPos()*delta), (int)(con.getYPos()*delta), (int)(con.getW()*delta), (int)(con.getH()*delta));
     }

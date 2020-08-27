@@ -72,6 +72,7 @@ public class SettingsController {
             case "Replace Color": toAdd = new RepColor(filterList, container);break;
             case "Saturation&Contrast": toAdd = new SatConCalc(filterList, container);break;
             case "Hue-Keep": toAdd = new HueKeepCalc(filterList, container);break;
+            case "Merge": toAdd = new MergeCalc(filterList, container);break;
         }
         if (toAdd != null){
             try {

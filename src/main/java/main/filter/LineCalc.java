@@ -21,7 +21,7 @@ public class LineCalc extends Filter {
     }
 
     @Override
-    public float[][][] run(float[][][] img, int resX, int resY, float delta) {
+    public float[][][] run(float[][][] img, int resX, int resY, float delta, boolean fullRun) {
         LineCon con = screen.getController(LineCon.class);
         return calc(con.getIt(), con.getRate(), new float[]{con.getX(), con.getY()}, con.getW(), con.getPoints(), img, resX, resY, delta);
     }

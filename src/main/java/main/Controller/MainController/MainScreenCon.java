@@ -113,6 +113,7 @@ public class MainScreenCon {
         addType.getItems().add("Replace Color");
         addType.getItems().add("Saturation&Contrast");
         addType.getItems().add("Hue-Keep");
+        addType.getItems().add("Merge");
         addType.getSelectionModel().select(0);
     }
 
@@ -150,7 +151,7 @@ public class MainScreenCon {
                     progressB.setProgress(0);
                 });
                 for (Filter filter: filterList.getItems()){
-                    imgArray = filter.runRun(imgArray, (int)img.getWidth(), (int)img.getHeight(), delta);
+                    imgArray = filter.runRun(imgArray, (int)img.getWidth(), (int)img.getHeight(), delta, false);
                     count++;
                     int finalCount = count;
                     Platform.runLater(() -> {
