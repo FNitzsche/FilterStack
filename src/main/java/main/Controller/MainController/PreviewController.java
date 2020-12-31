@@ -85,6 +85,7 @@ public class PreviewController {
                     System.out.println("start app");
                     FilterStack.resetRan();
                     ((FilterStack) previewStackList.getSelectionModel().getSelectedItem()).runFilters(false, (int)preview.getWidth(), (int)preview.getHeight(), 1);
+                    System.gc();
                     System.out.println("finished app");
                 }
             };
@@ -129,6 +130,7 @@ public class PreviewController {
                     } catch (Exception s) {
                         System.out.println(s);
                     }
+                    System.gc();
                     System.out.println("finished saving");
                 }
             };

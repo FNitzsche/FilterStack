@@ -27,6 +27,7 @@ public class AppLaunch extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
         stage.setScene(new Scene(new HBox(canvas)));
         stage.show();
         calc3();

@@ -10,6 +10,7 @@ public class AppStart extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        System.out.println("V_0.1.1");
         mainScreen = new FXMLLoad("/mainScreen.fxml", new MainScreenCon(stage));
         stage.setScene(mainScreen.getScene());
         stage.show();
