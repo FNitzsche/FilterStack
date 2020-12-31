@@ -5,10 +5,12 @@ import javafx.scene.layout.HBox;
 import main.Controller.FilterController.VoronoiCon;
 import main.FXMLLoad;
 import main.filter.assiClasses.Filter;
+import main.filter.assiClasses.PixelSupplier;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicIntegerArray;
+import java.util.concurrent.atomic.AtomicReferenceArray;
+import java.util.stream.Stream;
 
 public class CellCalc extends Filter {
 
@@ -22,9 +24,9 @@ public class CellCalc extends Filter {
     int sub = 15;
 
     public float[][][] cell(int n, float[][][] img, int resX, int rexY, int x, int y, int w, int h){
-        System.out.println("n " + n);
+        System.gc();
+        System.out.println("Cells " + n);
         int root = (int)Math.min(Math.min(Math.sqrt(n/10)/5, resX/30), rexY/30);
-        System.out.println("r" + root);
         if (n >= 100000 && resX > 700 && rexY > 700){
             sub = root;
         } else if (n >= 10000){
@@ -34,10 +36,11 @@ public class CellCalc extends Filter {
         } else {
             sub = 1;
         }
-        System.out.println(sub);
-        ArrayList<int[]>[] cells = new ArrayList[n];
-        float[][] centers = new float[n][5];
-        int[][][] toCell = new int[resX][rexY][3];
+        System.out.println("Divisions: " + sub);
+        //List<int[]>[] cells = new List[n];
+        int[][][] cellKeys = new int[resX][rexY][3];
+        //AtomicIntegerArray cKeys = new AtomicIntegerArray(rexY*resX);
+        float[][] centers = new float[n][6];
 
         ArrayList<Integer>[][] subdiv = new ArrayList[sub][sub];
 
@@ -45,7 +48,7 @@ public class CellCalc extends Filter {
             centers[i][0] = random.nextFloat()*w+x;
             centers[i][1] = random.nextFloat()*h+y;
             //System.out.println("d;" + centers[i][0]);
-            cells[i] = new ArrayList<>();
+            //cells[i] = Collections.synchronizedList(new ArrayList<int[]>());
         }
 
         for (int i = 0; i < sub; i++){
@@ -59,69 +62,69 @@ public class CellCalc extends Filter {
                 }
             }
         }
+        System.out.println("divided");
 
-        for (int i = x; i < x+w; i++) {
-            for (int j = y; j < y+h; j++) {
-                if (i < resX && j < rexY) {
-                    toCell[i][j][0] = i;
-                    toCell[i][j][1] = j;
+
+        Stream.generate(new PixelSupplier(resX, rexY)).limit(resX*rexY).forEach(pixel -> {
+            if (pixel[0] < resX && pixel[1] < rexY) {
+                cellKeys[pixel[0]][pixel[1]][0] = pixel[0];
+                cellKeys[pixel[0]][pixel[1]][1] = pixel[1];
+            }
+        });
+
+        Arrays.stream(cellKeys).parallel().flatMap(row -> Arrays.stream(row)).forEach(pixel -> {
+            if (pixel[0] < resX && pixel[1] < rexY) {
+                float dist = resX + rexY;
+                int cell = 0;
+                int divX = (int) (pixel[0] / (resX / sub + 1));
+                int divY = (int) (pixel[1] / (rexY / sub + 1));
+
+                for (int a : subdiv[divX][divY]) {
+                    float tmpDist = (float) Math.sqrt(Math.pow(pixel[0] - centers[a][0], 2) + Math.pow(pixel[1] - centers[a][1], 2));
+                    if (tmpDist < dist) {
+                        dist = tmpDist;
+                        cell = a;
+                    }
                 }
+                //cells[cell].add(new int[]{pixel[0], pixel[1]});
+                //cKeys.getAndSet(pixel[0]+pixel[1]*resX, cell);
+                pixel[2] = cell;
+            }
+        });
+
+        System.out.println("celled");
+
+
+        for (int k = 0; k < resX; k++){
+            for (int j = 0; j < rexY; j++) {
+                    centers[cellKeys[k][j][2]][2] += img[k][j][0];
+                    centers[cellKeys[k][j][2]][3] += img[k][j][1];
+                    centers[cellKeys[k][j][2]][4] += img[k][j][2];
+                    centers[cellKeys[k][j][2]][5]++;
+                //centers[cKeys.get(k+j*resX)][2] += img[k][j][0];
+                //centers[cKeys.get(k+j*resX)][3] += img[k][j][1];
+                //centers[cKeys.get(k+j*resX)][4] += img[k][j][2];
+                //centers[cKeys.get(k+j*resX)][5]++;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if (centers[i][5] > 0) {
+                centers[i][2] /= centers[i][5];
+                centers[i][3] /= centers[i][5];
+                centers[i][4] /= centers[i][5];
             }
         }
 
-        Arrays.stream(toCell).parallel().forEach(p -> Arrays.stream(p).parallel().forEach(pixel -> {
-            float dist = resX+rexY;
-            int cell = 0;
-            int divX = (int)(pixel[0]/(resX/sub +1));
-            int divY = (int)(pixel[1]/(rexY/sub +1));
 
-            for (int a: subdiv[divX][divY]){
-                float tmpDist = (float)Math.sqrt(Math.pow(pixel[0]-centers[a][0], 2) + Math.pow(pixel[1]-centers[a][1], 2));
-                if (tmpDist < dist){
-                    dist = tmpDist;
-                    cell = a;
-                }
-            }
-
-            /*for (int a = 0; a < n; a++){
-                float tmpDist = (float)Math.sqrt(Math.pow(pixel[0]-centers[a][0], 2) + Math.pow(pixel[1]-centers[a][1], 2));
-                if (tmpDist < dist){
-                    dist = tmpDist;
-                    cell = a;
-                }
-            }*/
-            pixel[2] = cell;
-
-        }));
-        Arrays.stream(toCell).forEach(p -> Arrays.stream(p).forEach(pixel -> {
-            cells[pixel[2]].add(new int[]{pixel[0], pixel[1]});
-        }));
-
-        for (int i = 0; i < n; i++){
-            float r = 0, g = 0, b = 0;
-            for (int[] pixel: cells[i]){
-                r += img[pixel[0]][pixel[1]][0];
-                g += img[pixel[0]][pixel[1]][1];
-                b += img[pixel[0]][pixel[1]][2];
-            }
-            if (cells[i].size() > 0){
-                r /= cells[i].size();
-                g /= cells[i].size();
-                b /= cells[i].size();
-            }
-            centers[i][2] = r;
-            centers[i][3] = g;
-            centers[i][4] = b;
-        }
-
-        for (int i = 0; i < n; i++){
-            for (int[] pixel: cells[i]){
-                img[pixel[0]][pixel[1]][0] = centers[i][2];
-                img[pixel[0]][pixel[1]][1] = centers[i][3];
-                img[pixel[0]][pixel[1]][2] = centers[i][4];
+        for (int i = 0; i < resX; i++){
+            for (int j = 0; j <rexY; j++){
+                img[i][j][0] = centers[cellKeys[i][j][2]][2];
+                img[i][j][1] = centers[cellKeys[i][j][2]][3];
+                img[i][j][2] = centers[cellKeys[i][j][2]][4];
             }
         }
-
+        System.out.println("pixels");
+        System.gc();
         return img;
     }
 

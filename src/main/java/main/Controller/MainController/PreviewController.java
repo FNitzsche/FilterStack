@@ -109,16 +109,19 @@ public class PreviewController {
                 public void run() {
                     System.out.println("start saving");
                     BaseImage img;
+                    float[][][] fullSizeImg;
                     if (previewStackList.getSelectionModel().getSelectedItem().getClass().equals(FilterStack.class)){
                         img = ((FilterStack) previewStackList.getSelectionModel().getSelectedItem()).baseImage;
                         FilterStack.resetRan();
-                        ((FilterStack) previewStackList.getSelectionModel().getSelectedItem()).runFilters(true, (int)img.getFullSize().length, (int)img.getFullSize()[0].length
-                                , (float) img.getFullSize()[0].length / (float) preview.getHeight());
+                        fullSizeImg = img.getFullSize();
+                        ((FilterStack) previewStackList.getSelectionModel().getSelectedItem()).runFilters(true, (int)fullSizeImg.length, (int)fullSizeImg[0].length
+                                , (float) fullSizeImg[0].length / (float) preview.getHeight());
                     } else {
                         img = (BaseImage) previewStackList.getSelectionModel().getSelectedItem();
+                        fullSizeImg = img.getFullSize();
                     }
-                    Image image = previewStackList.getSelectionModel().getSelectedItem().showImage(true, (int)img.getFullSize().length, (int)img.getFullSize()[0].length
-                            , (float) img.getFullSize()[0].length / (float) preview.getHeight());
+                    Image image = previewStackList.getSelectionModel().getSelectedItem().showImage(true, (int)fullSizeImg.length, (int)fullSizeImg[0].length
+                            , (float) fullSizeImg[0].length / (float) preview.getHeight());
 
                     File file = new File(p + ".png");
                     try {

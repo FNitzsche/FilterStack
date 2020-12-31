@@ -8,6 +8,8 @@ import main.FXMLLoad;
 import main.filter.assiClasses.Filter;
 import model.FilterStack;
 
+import java.lang.management.GarbageCollectorMXBean;
+import java.sql.SQLOutput;
 import java.util.Arrays;
 
 public class MergeCalc extends Filter {
@@ -36,15 +38,20 @@ public class MergeCalc extends Filter {
     public float[][][] calc(FilterStack stack, String mode, float border, boolean invert, boolean useMask,
                             FilterStack mask, boolean useSat, float[][][] img, int resX, int resY, float delta, boolean con, boolean fullRun){
 
+        System.out.println("Pre merge:\nUsed Heap: " + Runtime.getRuntime().totalMemory() + "; Max Heap: " + Runtime.getRuntime().maxMemory() + "; FreeHeap: " + Runtime.getRuntime().freeMemory());
         float[][][] overlay = stack.runFilters(fullRun, resX, resY, delta);
-        float[][][] maskArray = {};
+        float[][][] maskArray;
+        System.out.println("mid merge:\nUsed Heap: " + Runtime.getRuntime().totalMemory() + "; Max Heap: " + Runtime.getRuntime().maxMemory() + "; FreeHeap: " + Runtime.getRuntime().freeMemory());
         if (useMask) {
             maskArray = mask.runFilters(fullRun, resX, resY, delta);
+        } else {
+            maskArray = new float[0][0][0];
         }
 
 
         img = overlay(img, overlay, maskArray, useMask, border, invert, useSat, con);
-
+        System.gc();
+        System.out.println("post merge:\nUsed Heap: " + Runtime.getRuntime().totalMemory() + "; Max Heap: " + Runtime.getRuntime().maxMemory() + "; FreeHeap: " + Runtime.getRuntime().freeMemory());
 
         return img;
     }

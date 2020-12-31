@@ -110,9 +110,11 @@ public class FilterStack implements Viewable{
             if (fullRun && ran) {
                 return lastImage;
             } else {
-                float[][][] img = baseImage.getPreSize();
+                float[][][] img;
                 if (fullRun) {
                     img = baseImage.getFullSize();
+                } else {
+                    img = baseImage.getPreSize();
                 }
                 float toAdd = 1f / filters.size();
                 for (Filter filter : filters) {
